@@ -12,7 +12,11 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
-      // TODO: search by traits
+      // TODO: search by traits (from the lists on data.js,  traits are considered gender through occupation)
+      //need to make 2 separate search prompts, one with 1 trait criteria, one with two to five critera.
+      let traits = promptFor("Please list a single trait to help in the search: Gender, age, height, weight, " +  
+      "eye color or occupation.") //adding prompt when "no" is chosen above and adding next search criteria. 
+      //1 trait search prompt. 
       break;
       default:
     app(people); // restart app
@@ -23,7 +27,8 @@ function app(people){
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
+  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants 
+  and other information that the user may want. */
 
   if(!person){
     alert("Could not find that individual.");
