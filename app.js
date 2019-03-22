@@ -14,13 +14,14 @@ function app(people){
       break;
     case 'no':
     	var numKnownTraits = parseInt(promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, Occupation?", chars));
-    	var sharedTrait;
+    	var sharedTrait = people;
     	for (let i = 0; i < numKnownTraits; i++){
-    		sharedTrait = searchByTrait(people,numKnownTraits);
+    		sharedTrait = searchByTrait(sharedTrait,numKnownTraits);
     	}	
-    		displayPeople(sharedTrait);
+    		displayPeople(sharedTrait); 
         // (Ryan) add a way to select an individual from the list
         // and add mainMenu(selectedPerson, people); or something like that
+        
         // TODO: search by traits (from the lists on data.js,  traits are considered gender through occupation)
         //need to make 2 separate search prompts, one with 1 trait criteria, one with two to five critera.
         // (Ryan) TODO: prompt for "how many things do you know about the person?
