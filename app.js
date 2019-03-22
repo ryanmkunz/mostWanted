@@ -21,14 +21,7 @@ function app(people){
     		displayPeople(sharedTrait); 
         // (Ryan) add a way to select an individual from the list
         // and add mainMenu(selectedPerson, people); or something like that
-        
-        // TODO: search by traits (from the lists on data.js,  traits are considered gender through occupation)
-        //need to make 2 separate search prompts, one with 1 trait criteria, one with two to five critera.
-        // (Ryan) TODO: prompt for "how many things do you know about the person?
-        // then prompt for either the 1 thing they know OR the 2-5 things they know
-        // utilize the "single criteria" search function in the "2-5 criteria" search function
-        //adding prompt when "no" is chosen above and adding next search criteria. 
-        //1 trait search prompt function needed from user story. (still need to do 2-5 criteria search prompt) 
+         
       break;
       default:
     app(people); // restart app
