@@ -13,24 +13,21 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
-    	var numKnownTraits = promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, Occupation?", chars);
-    	if (numKnownTraits == 1)	{
-    		var sharedTrait = searchByTrait(people);
-    		// displayPeople(sharedTrait);
-    		console.log(sharedTrait);
-
-    		    }
-    	else if (knownTraits > 1)	{
-    		
-		}
-
-      // TODO: search by traits (from the lists on data.js,  traits are considered gender through occupation)
-      //need to make 2 separate search prompts, one with 1 trait criteria, one with two to five critera.
-      // (Ryan) TODO: prompt for "how many things do you know about the person?
-      // then prompt for either the 1 thing they know OR the 2-5 things they know
-      // utilize the "single criteria" search function in the "2-5 criteria" search function
-       //adding prompt when "no" is chosen above and adding next search criteria. 
-      //1 trait search prompt function needed from user story. (still need to do 2-5 criteria search prompt) 
+    	var numKnownTraits = parseInt(promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, Occupation?", chars));
+    	var sharedTrait;
+    	for (let i = 0; i < numKnownTraits; i++){
+    		sharedTrait = searchByTrait(people,numKnownTraits);
+    	}	
+    		displayPeople(sharedTrait);
+        // (Ryan) add a way to select an individual from the list
+        // and add mainMenu(selectedPerson, people); or something like that
+        // TODO: search by traits (from the lists on data.js,  traits are considered gender through occupation)
+        //need to make 2 separate search prompts, one with 1 trait criteria, one with two to five critera.
+        // (Ryan) TODO: prompt for "how many things do you know about the person?
+        // then prompt for either the 1 thing they know OR the 2-5 things they know
+        // utilize the "single criteria" search function in the "2-5 criteria" search function
+        //adding prompt when "no" is chosen above and adding next search criteria. 
+        //1 trait search prompt function needed from user story. (still need to do 2-5 criteria search prompt) 
       break;
       default:
     app(people); // restart app
@@ -86,11 +83,11 @@ function searchByName(people){
   return foundPerson[0];  // if this is true, and we have found the right person, is it as simple as returning all
   //data we have about the person in a prompt?
 }
-function searchByTrait(people){
-  	var traitName = promptFor("Please list a single trait to help in the search: Gender, age, height, weight, " +  
-  	"eye color or occupation.", chars);
+function searchByTrait(people,numKnownTraits){
+  	var traitName = promptFor("Please list a single trait to help in the search: gender, dob, height, weight, " +  
+  	"eyeColor or occupation.", chars);
   	var traitValue = promptFor("Please enter " + traitName + ": ", chars);
-	  	var sharedTrait = people.filter(function(person){ //This is not working properly. it returns an empty array.
+	  	var sharedTrait = people.filter(function(person){ 
   		if(person[traitName] === traitValue){
   			return true;
   		}
@@ -98,7 +95,7 @@ function searchByTrait(people){
   			return false;
   		}
 	})
-	displayPeople(sharedTrait);
+	return sharedTrait;
 }
 // alerts a list of people
 function displayPeople(people){
