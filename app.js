@@ -91,14 +91,14 @@ function searchByTrait(people){
   	"eye color or occupation.", chars);
   	var traitValue = promptFor("Please enter " + traitName + ": ", chars);
 	  	var sharedTrait = people.filter(function(person){ //This is not working properly. it returns an empty array.
-  		if(person.toString(traitName) == traitValue)	{
+  		if(person[traitName] === traitValue){
   			return true;
   		}
   		else{
   			return false;
   		}
-		})
-	  	console.log(sharedTrait);
+	})
+	displayPeople(sharedTrait);
 }
 // alerts a list of people
 function displayPeople(people){
@@ -106,7 +106,7 @@ function displayPeople(people){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
-function calculateAge(dob)	{
+function calculateAge(dob){
 	let dobNew = new Date(dob);
 	let timeDiff = Date.now() - dobNew;
 	return Math.floor(timeDiff*0.00000000003171);
