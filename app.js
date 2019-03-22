@@ -24,14 +24,12 @@ function app(people){
       break;
   }
 }
-
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original 
   dataset of people. We need people in order to find descendants 
   and other information that the user may want. */
-
   if(!person){
     alert("Could not find that individual.");
     return app(people); // restart
@@ -83,7 +81,15 @@ function displayPeople(people){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
+function calculateAge (dob)	{
+	// let diff_ms = Date.now() - dob.getTime();
+	// let age_dt = new Date(diff_ms);
 
+	// return Math.abs(age_dt.getUTCFullYear() - 1970);
+	let dobNew = new Date(dob);
+	let timeDiff = Date.now() - dobNew;
+	return Math.floor(timeDiff*0.00000000003171);
+}
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
@@ -93,7 +99,7 @@ function displayPerson(person){
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "Occupation: " + person.occupation + "\n"; 
   //personInfo += "Age: " + person.age + "\n";    we could take this out, or figure out JS to compute age from birth date. 
-
+  personInfo += "Age: " + calculateAge(person.dob) + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
