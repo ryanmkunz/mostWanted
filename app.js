@@ -13,10 +13,23 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
+    	var numKnownTraits = promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, Occupation?", chars);
+    	if (numKnownTraits == 1)	{
+    		var sharedTrait = searchByTrait(people);
+    		// displayPeople(sharedTrait);
+    		console.log(sharedTrait);
+
+    		    }
+    	else if (knownTraits > 1)	{
+    		
+		}
+
       // TODO: search by traits (from the lists on data.js,  traits are considered gender through occupation)
       //need to make 2 separate search prompts, one with 1 trait criteria, one with two to five critera.
-      let traits = promptFor("Please list a single trait to help in the search: Gender, age, height, weight, " +  
-      "eye color or occupation.") //adding prompt when "no" is chosen above and adding next search criteria. 
+      // (Ryan) TODO: prompt for "how many things do you know about the person?
+      // then prompt for either the 1 thing they know OR the 2-5 things they know
+      // utilize the "single criteria" search function in the "2-5 criteria" search function
+       //adding prompt when "no" is chosen above and adding next search criteria. 
       //1 trait search prompt function needed from user story. (still need to do 2-5 criteria search prompt) 
       break;
       default:
@@ -35,8 +48,8 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their " +
-   " 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  var displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their " +
+   " 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", chars);
 
   switch(displayOption){
     case "info":
@@ -57,7 +70,6 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
-
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
@@ -74,18 +86,27 @@ function searchByName(people){
   return foundPerson[0];  // if this is true, and we have found the right person, is it as simple as returning all
   //data we have about the person in a prompt?
 }
-
+function searchByTrait(people){
+  	var traitName = promptFor("Please list a single trait to help in the search: Gender, age, height, weight, " +  
+  	"eye color or occupation.", chars);
+  	var traitValue = promptFor("Please enter " + traitName + ": ", chars);
+	  	var sharedTrait = people.filter(function(person){ //This is not working properly. it returns an empty array.
+  		if(person.toString(traitName) == traitValue)	{
+  			return true;
+  		}
+  		else{
+  			return false;
+  		}
+		})
+	  	console.log(sharedTrait);
+}
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
-function calculateAge (dob)	{
-	// let diff_ms = Date.now() - dob.getTime();
-	// let age_dt = new Date(diff_ms);
-
-	// return Math.abs(age_dt.getUTCFullYear() - 1970);
+function calculateAge(dob)	{
 	let dobNew = new Date(dob);
 	let timeDiff = Date.now() - dobNew;
 	return Math.floor(timeDiff*0.00000000003171);
