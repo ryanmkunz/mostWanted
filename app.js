@@ -9,7 +9,7 @@ function app(people){
   switch(searchType){
     case 'yes':
       var foundPerson = searchByName(people);
-      displayPerson(foundPerson);
+ 	  // displayPerson(foundPerson);     
       mainMenu(foundPerson, people);
       break;
     case 'no':
@@ -45,6 +45,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    alert(displayPerson(person));
     break;
     case "family":
     // TODO: get person's family
@@ -91,11 +92,21 @@ function searchByTrait(people,numKnownTraits){
 	})
 	return sharedTrait;
 }
+function getDescendants(){
+
+}
+function getImmediateFamily(){
+
+}
 // alerts a list of people
 function displayPeople(people){
-  alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
+  let enumeration = 0;
+  let selection = prompt("Enter an individual's number for more options"+"\n"
+  	+people.map(function(person){
+  	enumeration++;
+    return enumeration + ". " + person.firstName + " " + person.lastName;
   }).join("\n"));
+  mainMenu(people[selection-1],people);
 }
 function calculateAge(dob){
 	let dobNew = new Date(dob);
