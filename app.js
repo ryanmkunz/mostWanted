@@ -100,8 +100,17 @@ function getImmediateFamily(person){
 	let immediateFamily = [];
 	for(let i = 0; i < data.length; i++){
 		if (data[i].id == person.currentSpouse){
-			displayPerson(data[i]);
+			immediateFamily.push(data[i]);
 		}
+		if (data[i].parents.includes(person.id)){
+			immediateFamily.push(data[i]);
+		}
+	}
+	if(immediateFamily.length > 1){
+		displayPeople(immediateFamily);
+	}
+	else	{
+		mainMenu(immediateFamily[0]);
 	}
 }
 // alerts a list of people
