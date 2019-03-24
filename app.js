@@ -49,6 +49,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
+    alert(getImmediateFamily(person));
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -95,8 +96,13 @@ function searchByTrait(people,numKnownTraits){
 function getDescendants(){
 
 }
-function getImmediateFamily(){
-
+function getImmediateFamily(person){
+	let immediateFamily = [];
+	for(let i = 0; i < data.length; i++){
+		if (data[i].id == person.currentSpouse){
+			displayPerson(data[i]);
+		}
+	}
 }
 // alerts a list of people
 function displayPeople(people){
@@ -106,7 +112,7 @@ function displayPeople(people){
   	enumeration++;
     return enumeration + ". " + person.firstName + " " + person.lastName;
   }).join("\n"));
-  mainMenu(people[selection-1],people);
+  mainMenu(people[selection-1],data);
 }
 function calculateAge(dob){
 	let dobNew = new Date(dob);
