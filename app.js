@@ -9,7 +9,7 @@ function app(people){
   switch(searchType){
     case 'yes':
       var foundPerson = searchByName(people);
- 	  // displayPerson(foundPerson);     
+      	  // displayPerson(foundPerson);     
       mainMenu(foundPerson, people);
       break;
     case 'no':
@@ -66,8 +66,10 @@ function mainMenu(person, people){
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-
-  var foundPerson = people.filter(function(person){
+ return firstName.toLowerCase();  //chris add 3_24. doesnt display name, need to fix. coming back as undefined. 
+ return lastName.toLowerCase();   //chris add 3_24. doesnt display name, need to fix. coming back as undefined.
+  var foundPerson = people.filter(function(person)
+   {
     if(person.firstName === firstName && person.lastName === lastName){
       return true;
     }
