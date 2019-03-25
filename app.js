@@ -5,23 +5,23 @@ Build all of your functions for displaying and gathering information below (GUI)
 
 // app is the function called to start the entire application
 function app(people){
+  for (let i = 0; i < people.length; i++){
+  	data[i].age = parseInt(calculateAge(data[i].dob));
+  }
+  console.log(data[0].age);
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-      var foundPerson = searchByName(people);
-      	  // displayPerson(foundPerson);     
+      var foundPerson = searchByName(people);    
       mainMenu(foundPerson, people);
       break;
     case 'no':
-    	var numKnownTraits = Math.floor(parseInt(promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, eyeColor, Occupation?", ints)));
+    	var numKnownTraits = promptFor("How many of the following traits do you know about the person: Gender, Age, Height, Weight, eyeColor, Occupation?", ints);
     	var sharedTrait = people;
     	for (let i = 0; i < numKnownTraits; i++){
     		sharedTrait = searchByTrait(sharedTrait,numKnownTraits);
     	}	
-    		displayPeople(sharedTrait); 
-        // (Ryan) add a way to select an individual from the list
-        // and add mainMenu(selectedPerson, people); or something like that
-         
+    		displayPeople(sharedTrait);          
       break;
       default:
     app(people); // restart app
@@ -79,14 +79,20 @@ function searchByName(people){
   //data we have about the person in a prompt?
 }
 function searchByTrait(people,numKnownTraits){
-  	var traitName = promptFor("Please list a single trait to help in the search: gender, dob, height, weight, " +  
+  	var traitName = promptFor("Please list a single trait to help in the search: gender, age, height, weight, " +  
   	"eyeColor or occupation.", chars);
-  	var traitValue = promptFor("Please enter " + traitName + ": ", chars);
+  	let traitValue;
+  	if (traitName == "age" || traitName == "height" || traitName == "weight"){
+  		traitValue = promptFor("Please enter " + traitName + ": ", ints);
+  	}
+  	else if (traitName == "gender" || traitName == "eyeColor" || traitName == "occupation"){
+  		traitValue = promptFor("Please enter " + traitName + ": ", chars);
+  	}  	
 	  	var sharedTrait = people.filter(function(person){ 
-  		if(person[traitName] === traitValue){
+  		if(person[traitName] == traitValue){
   			return true;
   		}
-  		else{
+  		else	{
   			return false;
   		}
 	})
@@ -204,12 +210,13 @@ function chars(input){
 		return true;
 	}
 		else	{
-		alert('Please input alphabet characters only');
+		alert('Please input characters only');
 		return false;
 	}
 }
 function ints(input){
-	if (isFinite(input) && input >= 1 && input <= 6){
+	let intInput = Math.floor(parseInt(input));
+	if (isFinite(intInput)){
 		return true;
 	}
 	else	{
