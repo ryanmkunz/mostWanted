@@ -39,7 +39,7 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  var displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their " +
+  var displayOption = promptFor("Found " + data.firstName + " " + data.lastName + " . Do you want to know their " +
    " 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", chars);
 
   switch(displayOption){
@@ -67,7 +67,7 @@ function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
  return firstName.toLowerCase();  //chris add 3_24. doesnt display name, need to fix. coming back as undefined. 
- return lastName.toLowerCase();   //chris add 3_24. doesnt display name, need to fix. coming back as undefined.
+ return lastName.toLowerCase();   //chris add 3_24. doesnt display name, need to fix.
   var foundPerson = people.filter(function(person)
    {
     if(person.firstName === firstName && person.lastName === lastName){
