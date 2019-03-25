@@ -13,7 +13,7 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
-    	var numKnownTraits = parseInt(promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, Occupation?", chars));
+    	var numKnownTraits = parseInt(promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, Occupation?", ints));
     	var sharedTrait = people;
     	for (let i = 0; i < numKnownTraits; i++){
     		sharedTrait = searchByTrait(sharedTrait,numKnownTraits);
@@ -183,6 +183,7 @@ function chars(input){
 		return false;
 	}
 }
+
 
 
 //need function to allow numbers only
