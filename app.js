@@ -55,7 +55,7 @@ function mainMenu(person, people){
     // TODO: get person's descendants
     break;
     case "restart":
-    app(people); // restart
+    app(data); // restart
     break;
     case "quit":
     return; // stop execution
@@ -95,10 +95,14 @@ function searchByTrait(people,numKnownTraits){
 	})
 	return sharedTrait;
 }
-function getDescendants(){
-
+function getDescendants(person){
+// TODO: write a function that returns children, and grandchildren 
+// using recursion
 }
+getDescendants(ryan);
 function getImmediateFamily(person){
+// TODO: needs to return relationship to "person" as well as their name	
+// TODO: needs to find siblings
 	let immediateFamily = [];
 	for(let i = 0; i < data.length; i++){
 		if (data[i].id == person.currentSpouse){
@@ -143,7 +147,6 @@ function displayPerson(person){
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
-
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
@@ -151,13 +154,12 @@ function promptFor(question, valid){
   } while(!response || !valid(response));
   return response;
 }
-
 // helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
-
 // helper function to pass in as default promptFor validation
 function chars(input){
+	
   return true; // default validation only
 }
