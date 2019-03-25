@@ -13,7 +13,7 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
-    	var numKnownTraits = parseInt(promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, Occupation?", ints));
+    	var numKnownTraits = parseInt(promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, eyeColor, Occupation?", ints));
     	var sharedTrait = people;
     	for (let i = 0; i < numKnownTraits; i++){
     		sharedTrait = searchByTrait(sharedTrait,numKnownTraits);
@@ -44,15 +44,12 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
     alert(displayPerson(person));
     break;
     case "family":
-    // TODO: get person's family
     alert(getImmediateFamily(person));
     break;
     case "descendants":
-    // TODO: get person's descendants
     alert(getDescendants(person));
     break;
     case "restart":
@@ -116,21 +113,46 @@ function getDescendants(person, children = [],counter = 0){
 function getImmediateFamily(person){
 // TODO: needs to return relationship to "person" as well as their name	
 // TODO: needs to find siblings
-	let immediateFamily = [];
+	let immediateFamily = "";
 	for(let i = 0; i < data.length; i++){
+		for (let j = 0; j < 2; j++){
+			if (data[i].id == person.parents[j]){
+				if (data[i].gender == "male"){
+					immediateFamily += ("Father: " + data[i].firstName +" "+ data[i].lastName+'\n');
+				}
+				else	{
+				immediateFamily += ("Mother: " + data[i].firstName +" "+ data[i].lastName+'\n');
+				}
+			}
+		}	
 		if (data[i].id == person.currentSpouse){
-			immediateFamily.push(data[i]);
+			if(data[i].gender == "male"){
+				immediateFamily += ("Husband: " + data[i].firstName +" "+ data[i].lastName+'\n');
+			}
+			else {
+				immediateFamily += ("Wife: " + data[i].firstName +" "+ data[i].lastName+'\n');
+			}
+
 		}
 		if (data[i].parents.includes(person.id)){
-			immediateFamily.push(data[i]);
+			if (data[i].gender == "male"){
+				immediateFamily += ("Son: " + data[i].firstName +" "+ data[i].lastName+'\n');
+			}
+			else {
+				immediateFamily += ("Daughter: " + data[i].firstName +" "+ data[i].lastName+'\n');
+			}
+		}
+		if (data[i].parents.includes(person.parents[0])){			
+			if (data[i].gender == "male"){
+				immediateFamily += ("Brother: " + data[i].firstName +" "+ data[i].lastName+'\n');
+			}
+			else	{
+				immediateFamily += ("Sister: " + data[i].firstName +" "+ data[i].lastName+'\n');
+			}
 		}
 	}
-	if(immediateFamily.length > 1){
-		displayPeople(immediateFamily);
-	}
-	else	{
-		mainMenu(immediateFamily[0]);
-	}
+	alert(immediateFamily);
+	mainMenu(person,data);
 }
 // alerts a list of people
 function displayPeople(people){
@@ -159,6 +181,7 @@ function displayPerson(person){
   personInfo += "Age: " + calculateAge(person.dob) + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
+  mainMenu(person,data);
 }
 // function that prompts and validates user input
 function promptFor(question, valid){
@@ -184,6 +207,8 @@ function chars(input){
 }
 function ints(input){
 	return true;
+	//todo: make sure input is a number
+	//todo: make sure number is between 1 and 6
 }
 
 
