@@ -113,7 +113,6 @@ function getDescendants(person, children = [],counter = 0){
 		mainMenu(children[0]);	
 	}
 }
-
 function getImmediateFamily(person){
 // TODO: needs to return relationship to "person" as well as their name	
 // TODO: needs to find siblings
