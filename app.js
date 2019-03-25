@@ -55,7 +55,7 @@ function mainMenu(person, people){
     // TODO: get person's descendants
     break;
     case "restart":
-    app(people); // restart
+    app(data); // restart
     break;
     case "quit":
     return; // stop execution
@@ -66,8 +66,8 @@ function mainMenu(person, people){
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
- return firstName.toLowerCase();  //chris add 3_24. doesnt display name, need to fix. coming back as undefined. 
- return lastName.toLowerCase();   //chris add 3_24. doesnt display name, need to fix. coming back as undefined.
+ // return firstName.toLowerCase();  //chris add 3_24. doesnt display name, need to fix. coming back as undefined. 
+ // return lastName.toLowerCase();   //chris add 3_24. doesnt display name, need to fix. coming back as undefined.
   var foundPerson = people.filter(function(person)
    {
     if(person.firstName === firstName && person.lastName === lastName){
