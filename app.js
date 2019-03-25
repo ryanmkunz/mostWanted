@@ -191,13 +191,6 @@ function chars(input)
       }
 
 
-// {
-//   if (input == "banana"){
-//     return false;
-//   }
-//   else {
-//     return true; // default validation only
-//   }
-	
+//need function to allow numbers only
   
 
