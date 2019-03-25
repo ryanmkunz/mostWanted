@@ -113,7 +113,6 @@ function getDescendants(person, children = [],counter = 0){
 		mainMenu(children[0]);	
 	}
 }
-
 function getImmediateFamily(person){
 // TODO: needs to return relationship to "person" as well as their name	
 // TODO: needs to find siblings
@@ -174,21 +173,16 @@ function yesNo(input){
 }
 // helper function to pass in as default promptFor validation
 //
-function chars(input)
-// function allLetter(inputtxt)
-      { 
-      var letters = /^[A-Za-z]+$/;
-      if(input == letters)
-      {
-      // alert('Your name have accepted : you can try another');
-      return true;
-      }
-      else
-      {
-      alert('Please input alphabet characters only');
-      return false;
-      }
-      }
+function chars(input){
+	// function allLetter(inputtxt)
+	if(/^[a-zA-Z]+$/.test(input))	{
+		return true;
+	}
+		else	{
+		alert('Please input alphabet characters only');
+		return false;
+	}
+}
 
 
 //need function to allow numbers only
