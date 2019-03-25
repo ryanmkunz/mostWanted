@@ -36,10 +36,10 @@ function mainMenu(person, people){
   and other information that the user may want. */
   if(!person){
     alert("Could not find that individual.");
-    return app(people); // restart
+    return app(data); // restart
   }
 
-  var displayOption = promptFor("Found " + data.firstName + " " + data.lastName + " . Do you want to know their " +
+  var displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their " +
    " 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", chars);
 
   switch(displayOption){
@@ -139,7 +139,7 @@ function displayPeople(people){
   	+people.map(function(person){
   	enumeration++;
     return enumeration + ". " + person.firstName + " " + person.lastName;
-  }).join("\n"));
+  	}).join("\n"));
   mainMenu(people[selection-1],data);
 }
 function calculateAge(dob){
@@ -172,7 +172,6 @@ function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 // helper function to pass in as default promptFor validation
-//
 function chars(input){
 	// function allLetter(inputtxt)
 	if(/^[a-zA-Z]+$/.test(input))	{
@@ -183,9 +182,9 @@ function chars(input){
 		return false;
 	}
 }
+function ints(input){
+	return true;
+}
 
 
-
-//need function to allow numbers only
-  
 
