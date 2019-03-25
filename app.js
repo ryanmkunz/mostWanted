@@ -53,6 +53,7 @@ function mainMenu(person, people){
     break;
     case "descendants":
     // TODO: get person's descendants
+    alert(getDescendants(person));
     break;
     case "restart":
     app(data); // restart
@@ -65,9 +66,10 @@ function mainMenu(person, people){
 }
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
-  var lastName = promptFor("What is the person's last name?// return firstName.toLowerCase();  //chris add 3_24. doesnt display name, need to fix. coming back as undefined. 
+  var lastName = promptFor("What is the person's last name?", chars);
+ // return firstName.toLowerCase();  //chris add 3_24. doesnt display name, need to fix. coming back as undefined. 
  // return lastName.toLowerCase();   //chris add 3_24. doesnt display", chars);
-  name, need to fix. coming back as undefined.
+ //name, need to fix. coming back as undefined.
   var foundPerson = people.filter(function(person)
    {
     if(person.firstName === firstName && person.lastName === lastName){
@@ -95,11 +97,24 @@ function searchByTrait(people,numKnownTraits){
 	})
 	return sharedTrait;
 }
-function getDescendants(person){
+function getDescendants(person, children = [],counter = 0){
 // TODO: write a function that returns children, and grandchildren 
 // using recursion
+	for (let i = 0; i < data.length; i++){
+		if (data[i].parents.includes(person.id)){
+			children.push(data[i]);
+		}
+	}
+	if (children.length > counter){
+		getDescendants(children[counter],children,counter+1);
+	}
+	else if (children.length > 1){
+		displayPeople(children);
+	}
+	else	{
+		mainMenu(children[0]);	
+	}
 }
-getDescendants(ryan);
 function getImmediateFamily(person){
 // TODO: needs to return relationship to "person" as well as their name	
 // TODO: needs to find siblings
