@@ -159,6 +159,7 @@ function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 // helper function to pass in as default promptFor validation
+//
 function chars(input){
 	
   return true; // default validation only
