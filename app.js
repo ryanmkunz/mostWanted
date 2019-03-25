@@ -13,7 +13,7 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
-    	var numKnownTraits = parseInt(promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, eyeColor, Occupation?", ints));
+    	var numKnownTraits = Math.floor(parseInt(promptFor("How many of the following traits do you know about the person: Gender, DOB, Height, Weight, eyeColor, Occupation?", ints)));
     	var sharedTrait = people;
     	for (let i = 0; i < numKnownTraits; i++){
     		sharedTrait = searchByTrait(sharedTrait,numKnownTraits);
@@ -106,8 +106,12 @@ function getDescendants(person, children = [],counter = 0){
 	else if (children.length > 1){
 		displayPeople(children);
 	}
-	else	{
+	else if (children.length == 1){
 		mainMenu(children[0]);	
+	}
+	else	{
+		alert(person.firstName + " " + person.lastName + " " + "doesn't have children.");
+		mainMenu(person,data);
 	}
 }
 function getImmediateFamily(person){
@@ -132,7 +136,6 @@ function getImmediateFamily(person){
 			else {
 				immediateFamily += ("Wife: " + data[i].firstName +" "+ data[i].lastName+'\n');
 			}
-
 		}
 		if (data[i].parents.includes(person.id)){
 			if (data[i].gender == "male"){
@@ -206,7 +209,12 @@ function chars(input){
 	}
 }
 function ints(input){
-	return true;
+	if (isFinite(input) && input >= 1 && input <= 6){
+		return true;
+	}
+	else	{
+		return false;
+	}
 	//todo: make sure input is a number
 	//todo: make sure number is between 1 and 6
 }
