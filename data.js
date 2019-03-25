@@ -4,7 +4,7 @@ const data = [
 		"id": 272822514,
 		"firstName": "Billy",
 		"lastName": "Bob",
-		"gender": "male",
+		"gender": "male", //traits are gender - > occupation
 		"dob": "1/18/1949",
 		"height": 71,
 		"weight": 175,
