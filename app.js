@@ -80,7 +80,7 @@ function searchByName(people){
 }
 function searchByTrait(people,numKnownTraits){
   	var traitName = promptFor("Please list a single trait to help in the search: gender, age, height, weight, " +  
-  	"eyeColor or occupation.", chars);
+  	"eyeColor or occupation.", traitsOnly);
   	let traitValue;
   	if (traitName == "age" || traitName == "height" || traitName == "weight"){
   		traitValue = promptFor("Please enter " + traitName + ": ", ints);
@@ -211,6 +211,15 @@ function chars(input){
 	}
 		else	{
 		alert('Please input characters only');
+		return false;
+	}
+}
+function traitsOnly(input){
+	if (chars(input)){
+		if (input == "gender" || input == "age" || input == "height" 
+			|| input == "weight" || input == "eyeColor" || input == "occupation"){
+			return true;	
+		}
 		return false;
 	}
 }
